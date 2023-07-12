@@ -1,0 +1,21 @@
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+  port: 0
+
+spring:
+  data:
+    mongodb:
+      port: 27017
+      host: localhost
+      database: Notifications
+  spring:
+
+  application:
+    name: notification-service
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka

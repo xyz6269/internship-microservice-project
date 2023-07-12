@@ -13,7 +13,7 @@ import org.springframework.http.codec.cbor.Jackson2CborDecoder;
 
 @Configuration
 public class MQConfig {
-    public static final String QUEUE = "ORDER_QUEUE";
+        public static final String QUEUE = "ORDER_QUEUE";
     public static final String EXCHANGE = "ORDER_EXCHANGE";
     public static final String ROUTING_KEY = "ORDER_ROUTING";
 

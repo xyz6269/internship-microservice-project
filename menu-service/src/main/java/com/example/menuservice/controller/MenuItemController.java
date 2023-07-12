@@ -1,14 +1,16 @@
 package com.example.menuservice.controller;
 
 
-import com.example.menuservice.dto.MenuItemDTO;
-import com.example.menuservice.entity.MenuItem;
-import com.example.menuservice.service.MenuItemService;
-import lombok.AllArgsConstructor;
+
+import com.example.menuservice.dto.ItemDTO;
+import com.example.menuservice.dto.ItemResponse;
+import com.example.menuservice.entity.Item;
+import com.example.menuservice.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,27 +21,45 @@ import java.util.List;
 @Slf4j
 public class MenuItemController {
 
-    private final MenuItemService menuItemService;
+    private final ItemService itemService;
 
     @PostMapping("/add-item")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addNewMenuItem(@RequestBody MenuItemDTO dto) {
+    public void addNewMenuItem(@RequestBody ItemDTO dto) {
         log.info("why tf you not working reeeeeeeeeeeeeeeeeeeeeeeetard");
-        menuItemService.addItem(dto);
+        itemService.addItem(dto);
     }
 
-    @DeleteMapping("/delete-item")
+    @DeleteMapping("/delete-item/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseStatus(HttpStatus.OK)
-    public void removeNewMenuItem(@PathVariable() String id) {
-        menuItemService.removeItem(id);
+    public void removeNewMenuItem(@PathVariable("id") String id) {
+        itemService.removeItem(id);
     }
 
     @GetMapping("/full-menu")
     @ResponseStatus(HttpStatus.OK)
-    public List<MenuItem> getFullMenu() {
-        return menuItemService.getFullMenu();
+    public List<Item> getFullMenu() {
+        return itemService.getFullMenu();
     }
+
+    @GetMapping("/user")
+    @ResponseStatus(HttpStatus.OK)
+    public String getUserEmail() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
+    @PostMapping("/place-items/{id}/{quantity}")
+    @ResponseStatus(HttpStatus.OK)
+    public String addItems(@PathVariable("id") String id,@PathVariable("quantity") int quantity) {
+        return itemService.AddItem(id,quantity);
+    }
+
+
+
+
+
+
 
 }

@@ -36,6 +36,20 @@ spring:
           predicates:
             - Path=/api/auth/**
 
+        - id: notification-service
+          uri: lb://notification-service
+          predicates:
+            - Path=/api/noti/**
+          filters:
+            - AuthenticationFilter
+
+        - id: delivery-service
+          uri: lb://delivery-service
+          predicates:
+            - Path=/api/delivery/**
+          filters:
+            - AuthenticationFilter
+
         - id: discovery-server
           uri: http://localhost:8761
           predicates:

@@ -15,5 +15,5 @@ public class MessageOrder {
     private String orderNumber;
     private Double fullPrice;
     private String customerEmail;
-    List<ItemDTO> orderedItems = new ArrayList<>();
+    List<ItemResponse> items = new ArrayList<>();
 }

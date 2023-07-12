@@ -19,11 +19,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: true
-  security:
-    oauth2:
-      resource-server:
-        jwt:
-          issuer-uri: https://idp.example.com/issuer
+
 
 eureka:
   client:

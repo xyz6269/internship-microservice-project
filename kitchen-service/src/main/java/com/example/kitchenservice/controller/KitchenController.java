@@ -1,34 +1,29 @@
 package com.example.kitchenservice.controller;
 
-import com.example.kitchenservice.DTO.OrderDto;
 import com.example.kitchenservice.entity.Order;
-import com.example.kitchenservice.service.OrderService;
-import com.example.kitchenservice.service.OrdersToPrepareService;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import com.example.kitchenservice.service.KitchenService;
+import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/kitchen")
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class KitchenController {
 
-    private final OrderService orderService;
-    private final OrdersToPrepareService toPrepareService;
+    private final KitchenService kitchenService;
 
-    @PostMapping("/add-order")
-    public void getOrders(@RequestBody OrderDto dto) {
-        orderService.createOrder(dto);
+    @GetMapping("/next")
+    @PreAuthorize("hasRole('ROLE_CHEF')")
+    public Order getnextOrder() {
+        return kitchenService.getOrdersQueue();
     }
-
-    @PostMapping("/prepare-orders")
-    public void prepareOrders() {
-        toPrepareService.prepareOrders();
-    }
-
-    @GetMapping("/queue-orders/{id}")
-    public List<Order> queUpdate(@PathVariable Long id) {
-        return toPrepareService.getPrepQueue(id);
+    @GetMapping("/ready")
+    @PreAuthorize("hasRole('ROLE_CHEF')")
+    public String orderReady() {
+        return kitchenService.prepareOrder();
     }
 }

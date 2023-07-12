@@ -22,7 +22,6 @@ public class Order {
     private Double price;
     @Column(unique = true)
     private String customerEmail;
-    private Integer orderAmount;
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Item> itemList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER ,cascade = CascadeType.MERGE)
+    List<Item> items = new ArrayList<>();
 }

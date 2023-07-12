@@ -22,5 +22,6 @@ public class Order {
     @Column(unique = true)
     private String customerEmail;
     @OneToMany(cascade = CascadeType.ALL)
-    List<Item> orderedItems = new ArrayList<>();
+    List<Item> items = new ArrayList<>();
+    private boolean isSubmitted;
 }

@@ -16,3 +16,10 @@ public class AuthenticationServiceApplication {
 
 
 //public class AuthenticationServiceApplication {}
+
+
+//kylmyys
+//mikd'tly
+
+//"firstName" : "customer33",
+//    "lastName" : "customer33",

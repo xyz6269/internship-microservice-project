@@ -10,6 +10,13 @@ spring:
         port: 27017
         host: localhost
         database: Menu
+  spring:
+    cache:
+      type: redis
+    redis:
+      host: localhost
+      port: 6379
+
   application:
     name: menu-service
 

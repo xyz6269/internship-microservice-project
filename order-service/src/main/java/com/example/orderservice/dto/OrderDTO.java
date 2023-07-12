@@ -14,5 +14,5 @@ import java.util.List;
 @Builder
 public class OrderDTO {
 
-    List<ItemDTO> orderedItems = new ArrayList<>();
+    List<ItemResponse> items = new ArrayList<>();
 }

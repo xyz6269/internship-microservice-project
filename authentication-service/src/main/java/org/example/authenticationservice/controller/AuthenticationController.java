@@ -10,6 +10,7 @@ import org.example.authenticationservice.entity.User;
 import org.example.authenticationservice.service.AuthenticationService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,7 +22,7 @@ public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
 
-    @PostMapping("/registry/signup")
+    @PostMapping("/signup")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request){
         log.info("hi my name is jefffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         return ResponseEntity.ok(authenticationService.register(request));
@@ -44,6 +45,12 @@ public class AuthenticationController {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(authenticationService.getCurrentUser().getEmail());
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/admin")
+    public  String adminCheckPoint() {
+        return "admin checkpoint";
     }
 
 

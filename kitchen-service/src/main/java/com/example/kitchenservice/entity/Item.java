@@ -21,7 +21,5 @@ public class Item {
     private Long id;
     private String name;
     private Integer quantity;
-    @ManyToMany
-    @JsonIgnore
-    private List<Order> orderList = new ArrayList<>();
+
 }

@@ -19,9 +19,12 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: true
+  rabbitmq:
+    addresses: localhost:5672
+
+
 
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka
-
